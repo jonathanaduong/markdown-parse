@@ -1,0 +1,1 @@
+[link with not parentheses after]
