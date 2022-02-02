@@ -26,7 +26,7 @@ public class MarkdownParseTest {
         ArrayList<String> expected = new ArrayList<>();
         expected.add("https://something.com");
         expected.add("some-page.html");
-        Path fileName = Path.of("test-file.md");
+        Path fileName = Path.of("test-file2.md");
         String contents = Files.readString(fileName);
         assertEquals(expected, MarkdownParse.getLinks(contents));
     }
@@ -47,7 +47,6 @@ public class MarkdownParseTest {
     @Test
     public void getLinksTestFive() throws IOException {
         ArrayList<String> expected = new ArrayList<>();
-        expected.add("page.com");
         Path fileName = Path.of("test-file5.md");
         String contents = Files.readString(fileName);
         assertEquals(expected, MarkdownParse.getLinks(contents));
@@ -55,8 +54,6 @@ public class MarkdownParseTest {
     @Test
     public void getLinksTestSix() throws IOException {
         ArrayList<String> expected = new ArrayList<>();
-        expected.add("test.com");
-        expected.add("testsite().html");
         Path fileName = Path.of("test-file6.md");
         String contents = Files.readString(fileName);
         assertEquals(expected, MarkdownParse.getLinks(contents));
@@ -71,6 +68,7 @@ public class MarkdownParseTest {
     @Test
     public void getLinksTestEight() throws IOException {
         ArrayList<String> expected = new ArrayList<>();
+        expected.add("a link on the first line");
         Path fileName = Path.of("test-file8.md");
         String contents = Files.readString(fileName);
         assertEquals(expected, MarkdownParse.getLinks(contents));
