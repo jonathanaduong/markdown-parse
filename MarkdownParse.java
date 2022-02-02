@@ -11,9 +11,6 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-            if(markdown.indexOf("[", currentIndex) == 1) {
-                break;
-            }
             if (markdown.indexOf("[", currentIndex) == -1) {
                 break;
             }
