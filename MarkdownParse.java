@@ -23,6 +23,36 @@ public class MarkdownParse {
             if (nextCloseBracket == -1) {
                 break;
             }
+
+            /* Snippet 3
+            int lineBreak = markdown.indexOf("\n", nextOpenBracket);
+            if (lineBreak != -1 && lineBreak < nextCloseBracket && markdown.indexOf("\n", lineBreak + 1) < nextCloseBracket) {
+                currentIndex++;
+                continue;
+            }
+            */
+
+            /* Snippet 2
+            int tempCloseBracket = markdown.indexOf("]", nextCloseBracket + 1);
+            if (tempCloseBracket != -1 && tempCloseBracket < markdown.indexOf("(", nextCloseBracket) && markdown.charAt(tempCloseBracket + 1) == '(') {
+                nextCloseBracket = tempCloseBracket;
+            }
+
+            int tempOpenBracket = markdown.indexOf("[", nextOpenBracket + 1);
+            if (tempOpenBracket != -1 && tempOpenBracket < nextCloseBracket && markdown.indexOf("(", tempOpenBracket) < nextCloseBracket) {
+                currentIndex++;
+                continue;
+            }
+            */
+
+            /* Snippet 1
+            int backTick = markdown.indexOf("`", nextOpenBracket);
+            if (backTick != -1 && backTick < nextCloseBracket) {
+                currentIndex++;
+                continue;
+            }
+            */
+
             if (markdown.indexOf("(", nextCloseBracket) != nextCloseBracket + 1) {
                 break;
             }
@@ -31,10 +61,19 @@ public class MarkdownParse {
                 break;
             }
             int closeParen = markdown.indexOf(")", openParen);
-            if (markdown.indexOf(")", closeParen + 1) != - 1 && (markdown.indexOf(")", closeParen + 1) < markdown.indexOf("[", closeParen) || markdown.indexOf("[", closeParen) == -1)) {
-                closeParen = markdown.indexOf(")", closeParen + 1);
+            if (closeParen == -1 || (markdown.indexOf("[", openParen) != -1 && closeParen > markdown.indexOf("[", openParen))) {
+                break;
             }
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
+
+            /* Snippet 2
+            int tempCloseParen = markdown.indexOf(")", closeParen + 1);
+            while (tempCloseParen != - 1 && (tempCloseParen < markdown.indexOf("[", closeParen) && tempCloseParen < markdown.indexOf("]", closeParen) || markdown.indexOf("[", closeParen) == -1)) {
+                closeParen = markdown.indexOf(")", closeParen + 1);
+                tempCloseParen = markdown.indexOf(")", closeParen + 1);
+            }
+            */
+
+            toReturn.add(markdown.substring(openParen + 1, closeParen).trim());
             currentIndex = closeParen + 1;
         }
         return toReturn;
