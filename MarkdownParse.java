@@ -26,7 +26,8 @@ public class MarkdownParse {
 
             /* Snippet 3
             int lineBreak = markdown.indexOf("\n", nextOpenBracket);
-            if (lineBreak != -1 && lineBreak < nextCloseBracket && markdown.indexOf("\n", lineBreak + 1) < nextCloseBracket) {
+            int nextLineBreak = markdown.indexOf("\n", lineBreak + 1);
+            if (lineBreak != -1 && lineBreak < nextCloseBracket && nextLineBreak < nextCloseBracket) {
                 currentIndex++;
                 continue;
             }
@@ -47,7 +48,8 @@ public class MarkdownParse {
 
             /* Snippet 1
             int backTick = markdown.indexOf("`", nextOpenBracket);
-            if (backTick != -1 && backTick < nextCloseBracket) {
+            int nextBackTick = markdown.indexOf("`", backTick + 1);
+            if (backTick != -1 && backTick < nextCloseBracket && (nextBackTick == -1 || nextBackTick > nextCloseBracket)) {
                 currentIndex++;
                 continue;
             }

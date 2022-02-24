@@ -86,6 +86,8 @@ public class MarkdownParseTest {
     public void getLinksTestTen() throws IOException {
         ArrayList<String> expected = new ArrayList<>();
         expected.add("`google.com");
+        expected.add("google.com");
+        expected.add("ucsd.edu");
         Path fileName = Path.of("./test-file10.md");
         String contents = Files.readString(fileName);
         assertEquals(expected, MarkdownParse.getLinks(contents));
